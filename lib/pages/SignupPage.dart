@@ -1,3 +1,4 @@
+import 'package:chat_app/auth/auth_service.dart';
 import 'package:chat_app/components/button.dart';
 import 'package:chat_app/components/textfield.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,24 @@ class SignupPage extends StatelessWidget {
   SignupPage({super.key, required this.onTap});
 
   // Login function
-  void signup() {}
+  void signup(BuildContext context) {
+    final authService = AuthService();
+    if (passwordController.text == confirmPasswordController.text) {
+      try {
+        authService.signUpWithEmailAndPassword(
+            emailController.text, passwordController.text);
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(title: Text(e.toString())));
+      }
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) =>
+              AlertDialog(title: Text("Password don't match!")));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +67,7 @@ class SignupPage extends StatelessWidget {
                 controller: confirmPasswordController,
               ),
               const SizedBox(height: 20),
-              MyButton(text: "Signup", onTap: signup),
+              MyButton(text: "Signup", onTap: () => signup(context)),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
