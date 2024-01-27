@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class MyTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
+  final FocusNode? focusNode;
   const MyTextField(
-      {super.key, required this.hintText, required this.controller});
+      {super.key,
+      required this.hintText,
+      required this.controller,
+      this.focusNode});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +17,7 @@ class MyTextField extends StatelessWidget {
       child: TextField(
           obscureText: hintText.contains("Password") ? true : false,
           controller: controller,
+          focusNode: focusNode,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderSide:

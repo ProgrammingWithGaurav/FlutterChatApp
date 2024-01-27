@@ -25,7 +25,7 @@ class UserTile extends StatelessWidget {
               // text
               Text(text,
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                       fontSize: 16))
             ])));
   }
